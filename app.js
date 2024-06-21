@@ -2,12 +2,11 @@ const axios = require("axios");
 const dotenv = require("dotenv").config();
 const { geminiRequester } = require("./gemini");
 
-//implement the fetching code to get information about the chat in: curl -X GET "https://api.telegram.org/bot<HERE_BOT_TOKEN>/getUpdates"
-
 const botToken = process.env.BOT_TOKEN;
 const chatId = process.env.CHAT_ID;
 
 async function sendTelegramMessage(botToken, chatId, message) {
+  // function that sends the
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   const payload = {
     chat_id: chatId,
@@ -34,5 +33,18 @@ async function sendTelegramMessage(botToken, chatId, message) {
   }
 }
 
-const message = "1+1";
-sendTelegramMessage(botToken, chatId, message);
+const query = async () => {
+  // function that catches the last message to the API bot
+  const search = await fetch(
+    `https://api.telegram.org/bot${botToken}/getUpdates`
+  );
+  const data = await search.json();
+  const text = data.result[data.result.length - 1].message.text;
+  return text;
+};
+
+query().then((text) => {
+  // here is called the function sendTelegramMessage. The two first arguments comes from the .env file and the last argument (text) comes from the query() function
+  console.log("last question in Telegram: " + text);
+  sendTelegramMessage(botToken, chatId, text);
+});
