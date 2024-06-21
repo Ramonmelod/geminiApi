@@ -1,19 +1,17 @@
 const axios = require("axios");
 const dotenv = require("dotenv").config();
 const { geminiRequester } = require("./gemini");
-let a = "1+1";
 
 //implement the fetching code to get information about the chat in: curl -X GET "https://api.telegram.org/bot<HERE_BOT_TOKEN>/getUpdates"
 
-async function sendTelegramMessage(/*botToken, chatId, message*/) {
-  const botToken = process.env.BOT_TOKEN;
-  const chatId = process.env.CHAT_ID;
-  const message = await geminiRequester(a);
+const botToken = process.env.BOT_TOKEN;
+const chatId = process.env.CHAT_ID;
 
+async function sendTelegramMessage(botToken, chatId, message) {
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   const payload = {
     chat_id: chatId,
-    text: message,
+    text: await geminiRequester(message),
   };
 
   try {
@@ -36,6 +34,5 @@ async function sendTelegramMessage(/*botToken, chatId, message*/) {
   }
 }
 
-sendTelegramMessage();
-
-//sendTelegramMessage(botToken, chatId, message);
+const message = "1+1";
+sendTelegramMessage(botToken, chatId, message);
