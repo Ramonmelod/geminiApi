@@ -1,16 +1,37 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const axios = require("axios");
 const dotenv = require("dotenv").config();
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+//implement the fetching code to get information about the chat in: curl -X GET "https://api.telegram.org/bot<HERE_BOT_TOKEN>/getUpdates"
 
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-async function run() {
-  const prompt = "1+1";
+async function sendTelegramMessage(botToken, chatId, message) {
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  const payload = {
+    chat_id: chatId,
+    text: message,
+  };
 
-  const result = await model.generateContent(prompt);
-  const response = await result.response;
-  const text = response.text();
-  console.log(text);
+  try {
+    const response = await axios.post(url, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.status === 200) {
+      console.log("Message sent successfully");
+    } else {
+      console.log("Failed to send message:", response.status, response.data);
+    }
+  } catch (error) {
+    console.error(
+      "Error sending message:",
+      error.response ? error.response.data : error.message
+    );
+  }
 }
 
-run();
+const botToken = process.env.BOT_TOKEN;
+const chatId = process.env.CHAT_ID;
+const message = "21.06.2024-morning";
+
+sendTelegramMessage(botToken, chatId, message);
