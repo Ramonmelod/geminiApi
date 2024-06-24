@@ -11,7 +11,7 @@
 
 ## Basic Telegram gemini consulting
 
-- This project enables your telegram bot to consulte Gemini AI for you directy in the chat
+- This project enables your telegram bot to consulte Gemini AI for you directly in the telegram chat
 
 Info: This project is still under construction!
 
