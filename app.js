@@ -40,11 +40,26 @@ const query = async () => {
   );
   const data = await search.json();
   const text = data.result[data.result.length - 1].message.text;
-  return text;
+
+  const timeLastMessage =
+    data.result[data.result.length - 1].message.date * 1000; //this multiplications trasforms from seconds to miliseconds
+
+  const timeNow = Date.now();
+
+  return { text, timeLastMessage, timeNow, data };
 };
 
-query().then((text) => {
+query().then(({ text, timeLastMessage, timeNow, data }) => {
   // here is called the function sendTelegramMessage. The two first arguments comes from the .env file and the last argument (text) comes from the query() function
+  /*console.log("timeLastMessage: " + timeLastMessage);
+  console.log("timeNow: " + timeNow);
   console.log("last question in Telegram: " + text);
-  sendTelegramMessage(botToken, chatId, text);
+  console.log("data.result.lenght: " + data.result.length);*/
+  if (data.result.length === 0) {
+    throw new Error("No messages found");
+  } else if (timeNow - 10000 < timeLastMessage) {
+    sendTelegramMessage(botToken, chatId, text);
+  } else {
+    console.log("no message in the last 10 seconds");
+  }
 });
