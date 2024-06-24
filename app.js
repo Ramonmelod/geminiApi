@@ -60,6 +60,6 @@ query().then(({ text, timeLastMessage, timeNow, data }) => {
   } else if (timeNow - 60000 < timeLastMessage) {
     sendTelegramMessage(botToken, chatId, text);
   } else {
-    console.log("no message in the last 10 seconds");
+    console.log("no message in the last 60 seconds");
   }
 });
