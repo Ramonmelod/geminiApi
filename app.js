@@ -57,7 +57,7 @@ query().then(({ text, timeLastMessage, timeNow, data }) => {
   console.log("data.result.lenght: " + data.result.length);*/
   if (data.result.length === 0) {
     throw new Error("No messages found");
-  } else if (timeNow - 10000 < timeLastMessage) {
+  } else if (timeNow - 60000 < timeLastMessage) {
     sendTelegramMessage(botToken, chatId, text);
   } else {
     console.log("no message in the last 10 seconds");
