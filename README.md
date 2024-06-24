@@ -13,7 +13,7 @@
 
 - This project enables your telegram bot to consulte Gemini AI for you directy in the chat
 
-Info: This project is under construction and compose.yml is not ready yet
+Info: This project is still under construction!
 
 ## Get started:
 
