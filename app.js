@@ -51,7 +51,7 @@ const query = async () => {
 console.log(
   "polling method running to retrieve updates from Telegram's servers"
 );
-const pool = setInterval(() => {
+/*const pool = setInterval(() => {
   query().then(({ text, timeLastMessage, timeNow, data }) => {
     if (data.result.length === 0) {
       throw new Error("No messages found");
@@ -60,4 +60,4 @@ const pool = setInterval(() => {
       sendTelegramMessage(botToken, chatId, text);
     }
   });
-}, 5000);
+}, 5000);*/
