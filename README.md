@@ -69,7 +69,7 @@ curl -X POST \
 - For setting an URL to be a webhook:
 
 ```sh
-curl -F "url=https://ramonmelo.com.br" "https://api.telegram.org/bot7089796505:AAGHbN5m-99HVhMD9KS62FeUbfByZWbGVwI/setWebhook"
+curl -F "url=https://ramonmelo.com.br" "https://api.telegram.org/botHERE_YOUR_BOT_TOKEN/setWebhook"
 ```
 
 ## Other usefull endpoints:
