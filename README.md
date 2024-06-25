@@ -57,6 +57,34 @@ curl   -H 'Content-Type: application/json'   -d '{"contents":[{"parts":[{"text":
 curl -X GET "https://api.telegram.org/bot<BOT_TOKEN>/getUpdates"
 ```
 
+- For sending a message directly to the bot chat:
+
+```sh
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"chat_id": "SEU_CHAT_ID", "text": "Esta é uma mensagem de teste enviada usando curl."}' \
+     https://api.telegram.org/botSEU_TOKEN_DO_BOT/sendMessage
+```
+
+- For setting an URL to be a webhook:
+
+```sh
+curl -F "url=https://ramonmelo.com.br" "https://api.telegram.org/bot7089796505:AAGHbN5m-99HVhMD9KS62FeUbfByZWbGVwI/setWebhook"
+```
+
+## Other usefull endpoints:
+
+- `getMe`: Retrieve basic information about your bot (e.g., username, bot ID).
+- `sendMessage`: Send text messages.
+- `sendPhoto`, `sendAudio`, `sendDocument`, `sendVideo`, `sendAnimation`: Send various types of media files.
+- `sendChatAction`: Show the user that something is happening on the bot's side (typing, uploading a photo/video/audio).
+- `getFile`: Get information about a file and download it.
+- `getWebhookInfo`
+- `answerInlineQuery`: Send answers to an inline query.
+- `sendChatAction`: Show the user that something is happening on the bot's side (typing, uploading a photo/video/audio).
+- `editMessageText`, editMessageCaption, editMessageReplyMarkup: Edit the text of a message, caption, or reply markup in a chat.
+- `deleteMessage`: Delete a message.
+
 ## Author
 
 - Ramon Melo — Linkedin: [/in/ramonmelod](https://www.linkedin.com/in/ramonmelod/)
