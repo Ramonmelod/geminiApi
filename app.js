@@ -48,9 +48,7 @@ const query = async () => {
 
   return { text, timeLastMessage, timeNow, data };
 };
-console.log(
-  "polling method running to retrieve updates from Telegram's servers"
-);
+console.log("running");
 /*const pool = setInterval(() => {
   query().then(({ text, timeLastMessage, timeNow, data }) => {
     if (data.result.length === 0) {
