@@ -48,18 +48,16 @@ const query = async () => {
 
   return { text, timeLastMessage, timeNow, data };
 };
-
-query().then(({ text, timeLastMessage, timeNow, data }) => {
-  // here is called the function sendTelegramMessage. The two first arguments comes from the .env file and the last argument (text) comes from the query() function
-  /*console.log("timeLastMessage: " + timeLastMessage);
-  console.log("timeNow: " + timeNow);
-  console.log("last question in Telegram: " + text);
-  console.log("data.result.lenght: " + data.result.length);*/
-  if (data.result.length === 0) {
-    throw new Error("No messages found");
-  } else if (timeNow - 60000 < timeLastMessage) {
-    sendTelegramMessage(botToken, chatId, text);
-  } else {
-    console.log("no message in the last 60 seconds");
-  }
-});
+console.log(
+  "polling method running to retrieve updates from Telegram's servers"
+);
+const pool = setInterval(() => {
+  query().then(({ text, timeLastMessage, timeNow, data }) => {
+    if (data.result.length === 0) {
+      throw new Error("No messages found");
+    } else if (timeNow - 5000 < timeLastMessage) {
+      //here you control the time that a message have to be answered
+      sendTelegramMessage(botToken, chatId, text);
+    }
+  });
+}, 5000);
